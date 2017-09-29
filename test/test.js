@@ -64,3 +64,14 @@ LyngkTestCase.prototype.testStory7 = function() {
 
     assertTrue((coordinates.get_color() === piece.get_color()) && (coordinates.get_state() === "ONE_PIECE"));
 };
+
+LyngkTestCase.prototype.testStory8 = function() {
+    var coordinates = new Lyngk.Coordinates("A", 3);
+    var blue_piece = new Lyngk.Piece("blue");
+    var red_piece = new Lyngk.Piece("red");
+
+    coordinates.put(blue_piece);
+    coordinates.put(red_piece);
+
+    assertTrue((coordinates.get_color() === red_piece.get_color()) && (coordinates.get_state() === "STACK"));
+};
