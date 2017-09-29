@@ -30,3 +30,9 @@ LyngkTestCase.prototype.testStory2 = function() {
 
     assertTrue((coordinates.representation() === "A1") && (typeof coordinates.representation() === 'string'));
 };
+
+LyngkTestCase.prototype.testStory2 = function() {
+    var coordinates = new Lyngk.Coordinates('A', 1);
+
+    assertTrue(coordinates.representation() === "invalid");
+};
