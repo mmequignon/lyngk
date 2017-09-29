@@ -31,20 +31,20 @@ LyngkTestCase.prototype.testStory2 = function() {
     assertTrue((coordinates.representation() === "A3") && (typeof coordinates.representation() === 'string'));
 };
 
-LyngkTestCase.prototype.testStory2 = function() {
+LyngkTestCase.prototype.testStory3 = function() {
     var coordinates = new Lyngk.Coordinates('A', 1);
 
     assertTrue(coordinates.representation() === "invalid");
 };
 
-LyngkTestCase.prototype.testStory3 = function() {
+LyngkTestCase.prototype.testStory4 = function() {
     var coordinates = new Lyngk.Coordinates("A", 3);
     var coordinates_copy = coordinates.clone();
     
     assertTrue(coordinates.representation() === coordinates_copy.representation());
 };
 
-LyngkTestCase.prototype.testStory3 = function() {
+LyngkTestCase.prototype.testStory5 = function() {
     var coordinates = new Lyngk.Coordinates("A", 3);
 
     assertTrue(coordinates.hash() === 68);
