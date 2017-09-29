@@ -1,7 +1,7 @@
 "use strict";
 
 Lyngk.Coordinates = function (c, l) {
-    var private_column, private_line;
+    var private_column, private_line, private_state;
 
     this.is_valid = function(){
 
@@ -16,6 +16,7 @@ Lyngk.Coordinates = function (c, l) {
     var init = function(c, l){
         private_column = c;
         private_line = l;
+        private_state = "VACANT";
     };
 
     this.representation = function(){
@@ -32,6 +33,10 @@ Lyngk.Coordinates = function (c, l) {
 
     this.hash = function(){
         return private_column.charCodeAt(0) + private_line;
+    };
+
+    this.get_state = function(){
+        return private_state;
     };
 
     init(c, l);
