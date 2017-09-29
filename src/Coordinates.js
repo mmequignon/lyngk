@@ -28,7 +28,11 @@ Lyngk.Coordinates = function (c, l) {
 
     this.clone = function(){
         return new Lyngk.Coordinates(private_column, private_line);
-    }
+    };
+
+    this.hash = function(){
+        return private_column.charCodeAt(0) + private_line;
+    };
 
     init(c, l);
 };
