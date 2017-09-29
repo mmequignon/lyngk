@@ -26,5 +26,9 @@ Lyngk.Coordinates = function (c, l) {
         };
     };
 
+    this.clone = function(){
+        return new Lyngk.Coordinates(private_column, private_line);
+    }
+
     init(c, l);
 };
