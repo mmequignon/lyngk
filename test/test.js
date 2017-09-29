@@ -24,3 +24,9 @@ LyngkTestCase.prototype.testStory2 = function() {
 
     assertTrue((count === 43));
 };
+
+LyngkTestCase.prototype.testStory2 = function() {
+    var coordinates = new Lyngk.Coordinates('A', 1);
+
+    assertTrue((coordinates.representation() === "A1") && (typeof coordinates.representation() === 'string'));
+};
