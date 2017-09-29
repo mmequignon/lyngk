@@ -19,7 +19,11 @@ Lyngk.Coordinates = function (c, l) {
     };
 
     this.representation = function(){
-      return private_column + private_line;
+        if (this.is_valid() === false) {
+            return "invalid";
+        } else {
+            return private_column + private_line;
+        };
     };
 
     init(c, l);
