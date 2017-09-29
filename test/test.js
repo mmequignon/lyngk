@@ -49,3 +49,9 @@ LyngkTestCase.prototype.testStory5 = function() {
 
     assertTrue(coordinates.hash() === 68);
 };
+
+LyngkTestCase.prototype.testStory6 = function() {
+    var coordinates = new Lyngk.Coordinates("A", 3);
+
+    assertTrue(coordinates.get_state() === "VACANT");
+};
