@@ -10,7 +10,7 @@ Lyngk.Coordinates = function (c, l) {
             return false;
         } else {
             return true;
-        };
+        }
     };
 
     var init = function(c, l){

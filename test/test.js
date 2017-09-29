@@ -19,8 +19,8 @@ LyngkTestCase.prototype.testStory2 = function() {
           if ( coords.is_valid() === true ){
               count++;
           }
-      };
-    };
+      }
+    }
 
     assertTrue((count === 43));
 };
