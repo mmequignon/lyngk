@@ -1,7 +1,7 @@
 "use strict";
 
 Lyngk.Coordinates = function (c, l) {
-    var private_column, private_line, private_state;
+    var private_column, private_line, private_state, private_color;
 
     this.is_valid = function(){
 
@@ -37,6 +37,15 @@ Lyngk.Coordinates = function (c, l) {
 
     this.get_state = function(){
         return private_state;
+    };
+
+    this.get_color = function(){
+        return private_color;
+    };
+
+    this.put = function(piece){
+        private_color = piece.get_color();
+        private_state = "ONE_PIECE";
     };
 
     init(c, l);
