@@ -55,3 +55,12 @@ LyngkTestCase.prototype.testStory6 = function() {
 
     assertTrue(coordinates.get_state() === "VACANT");
 };
+
+LyngkTestCase.prototype.testStory7 = function() {
+    var coordinates = new Lyngk.Coordinates("A", 3);
+    var piece = new Lyngk.Piece("blue");
+
+    coordinates.put(piece);
+
+    assertTrue((coordinates.get_color() === piece.get_color()) && (coordinates.get_state() === "ONE_PIECE"));
+};
