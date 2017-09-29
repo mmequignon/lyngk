@@ -45,7 +45,12 @@ Lyngk.Coordinates = function (c, l) {
 
     this.put = function(piece){
         private_color = piece.get_color();
-        private_state = "ONE_PIECE";
+        if (private_state === "VACANT") {
+            private_state = "ONE_PIECE";
+        }
+        else{
+            private_state = "STACK";
+        }
     };
 
     init(c, l);
