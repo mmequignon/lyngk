@@ -26,9 +26,9 @@ LyngkTestCase.prototype.testStory2 = function() {
 };
 
 LyngkTestCase.prototype.testStory2 = function() {
-    var coordinates = new Lyngk.Coordinates('A', 1);
+    var coordinates = new Lyngk.Coordinates('A', 3);
 
-    assertTrue((coordinates.representation() === "A1") && (typeof coordinates.representation() === 'string'));
+    assertTrue((coordinates.representation() === "A3") && (typeof coordinates.representation() === 'string'));
 };
 
 LyngkTestCase.prototype.testStory2 = function() {
