@@ -36,3 +36,10 @@ LyngkTestCase.prototype.testStory2 = function() {
 
     assertTrue(coordinates.representation() === "invalid");
 };
+
+LyngkTestCase.prototype.testStory3 = function() {
+    var coordinates = new Lyngk.Coordinates("A", 3);
+    var coordinates_copy = coordinates.clone();
+    
+    assertTrue(coordinates.representation() === coordinates_copy.representation());
+};
