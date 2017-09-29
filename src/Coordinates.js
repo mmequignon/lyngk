@@ -18,5 +18,9 @@ Lyngk.Coordinates = function (c, l) {
         private_line = l;
     };
 
+    this.representation = function(){
+      return private_column + private_line;
+    };
+
     init(c, l);
 };
