@@ -25,38 +25,38 @@ LyngkTestCase.prototype.testStory2 = function() {
     assertTrue((count === 43));
 };
 
-LyngkTestCase.prototype.testStory2 = function() {
+LyngkTestCase.prototype.testStory3 = function() {
     var coordinates = new Lyngk.Coordinates('A', 3);
 
     assertTrue((coordinates.representation() === "A3") && (typeof coordinates.representation() === 'string'));
 };
 
-LyngkTestCase.prototype.testStory3 = function() {
+LyngkTestCase.prototype.testStory4 = function() {
     var coordinates = new Lyngk.Coordinates('A', 1);
 
     assertTrue(coordinates.representation() === "invalid");
 };
 
-LyngkTestCase.prototype.testStory4 = function() {
+LyngkTestCase.prototype.testStory5 = function() {
     var coordinates = new Lyngk.Coordinates("A", 3);
     var coordinates_copy = coordinates.clone();
     
     assertTrue(coordinates.representation() === coordinates_copy.representation());
 };
 
-LyngkTestCase.prototype.testStory5 = function() {
+LyngkTestCase.prototype.testStory6 = function() {
     var coordinates = new Lyngk.Coordinates("A", 3);
 
     assertTrue(coordinates.hash() === 68);
 };
 
-LyngkTestCase.prototype.testStory6 = function() {
+LyngkTestCase.prototype.testStory7 = function() {
     var coordinates = new Lyngk.Coordinates("A", 3);
 
     assertTrue(coordinates.get_state() === "VACANT");
 };
 
-LyngkTestCase.prototype.testStory7 = function() {
+LyngkTestCase.prototype.testStory8 = function() {
     var coordinates = new Lyngk.Coordinates("A", 3);
     var piece = new Lyngk.Piece("blue");
 
@@ -65,7 +65,7 @@ LyngkTestCase.prototype.testStory7 = function() {
     assertTrue((coordinates.get_color() === piece.get_color()) && (coordinates.get_state() === "ONE_PIECE"));
 };
 
-LyngkTestCase.prototype.testStory8 = function() {
+LyngkTestCase.prototype.testStory9 = function() {
     var coordinates = new Lyngk.Coordinates("A", 3);
     var blue_piece = new Lyngk.Piece("blue");
     var red_piece = new Lyngk.Piece("red");
@@ -76,7 +76,7 @@ LyngkTestCase.prototype.testStory8 = function() {
     assertTrue((coordinates.get_color() === red_piece.get_color()) && (coordinates.get_state() === "STACK"));
 };
 
-LyngkTestCase.prototype.testStory9 = function() {
+LyngkTestCase.prototype.testStory10 = function() {
     var coordinates = new Lyngk.Coordinates("A", 3);
     var blue_piece = new Lyngk.Piece("blue");
     for (var i = 0; i < 5; i++){
