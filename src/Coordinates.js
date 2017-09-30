@@ -1,7 +1,7 @@
 "use strict";
 
 Lyngk.Coordinates = function (c, l) {
-    var private_column, private_line, private_state, private_color;
+    var private_column, private_line, private_state, private_color, private_count;
 
     this.is_valid = function(){
 
@@ -17,6 +17,7 @@ Lyngk.Coordinates = function (c, l) {
         private_column = c;
         private_line = l;
         private_state = "VACANT";
+        private_count = 0;
     };
 
     this.representation = function(){
@@ -24,7 +25,7 @@ Lyngk.Coordinates = function (c, l) {
             return "invalid";
         } else {
             return private_column + private_line;
-        };
+        }
     };
 
     this.clone = function(){
@@ -43,13 +44,23 @@ Lyngk.Coordinates = function (c, l) {
         return private_color;
     };
 
-    this.put = function(piece){
-        private_color = piece.get_color();
-        if (private_state === "VACANT") {
-            private_state = "ONE_PIECE";
-        }
-        else{
-            private_state = "STACK";
+    this.get_count = function(){
+        return private_count;
+    };
+
+    this.put = function(piece) {
+        if (private_state !== "FULL_STACK"){
+            if (private_count === 0){
+                private_state = "ONE_PIECE";
+            }
+            else if (private_count === 4){
+                private_state = "FULL_STACK";
+            }
+            else {
+                private_state = "STACK";
+            }
+            private_color = piece.get_color();
+            private_count += 1;
         }
     };
 
