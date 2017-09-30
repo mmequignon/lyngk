@@ -110,3 +110,34 @@ LyngkTestCase.prototype.testStory11 = function() {
         }
     }
 };
+
+LyngkTestCase.prototype.testStory12 = function(){
+    var table = new Lyngk.Engine();
+    var colors = ["BLACK", "IVORY", "BLUE", "RED", "GREEN", "WHITE"];
+    var color_count = {};
+    var lines = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    var rows = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
+    for (var r in rows){
+        for (var l in lines){
+            var coordinates = new Lyngk.Coordinates(r, l);
+            if (coordinates.is_valid()){
+                var hash = coordinates.hash();
+                var table_coordinates = table.get_coordinates()[hash];
+                color_count[table_coordinates.get_color()] += 1;
+            }
+        }
+    }
+    for (var color in color_count) {
+        if (colors.indexOf(color) > -1 ) {
+            if (color === "WHITE") {
+                assertTrue(color_count[color] === 3);
+            }
+            else {
+                assertTrue(color_count[color] === 8);
+            }
+        }
+        else {
+            assertTrue(false);
+        }
+    }
+};
