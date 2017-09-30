@@ -97,30 +97,26 @@ LyngkTestCase.prototype.testStory11 = function() {
     var rows = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
     for (var r in rows){
         for (var l in lines){
-            var coordinates = new Lyngk.Coordinates(r, l);
+            var coordinates = new Lyngk.Coordinates(rows[r], lines[l]);
             var hash = coordinates.hash();
             var table_coordinates = table.get_coordinates()[hash];
             if (coordinates.is_valid() == true){
                 assertTrue(table_coordinates.get_state() === "ONE_PIECE");
             }
-            else {
-                assertFalse(table_coordinates.get_state() === "VACANT");
-            }
-
         }
     }
 };
 
 LyngkTestCase.prototype.testStory12 = function(){
     var table = new Lyngk.Engine();
-    var colors = ["BLACK", "IVORY", "BLUE", "RED", "GREEN", "WHITE"];
-    var color_count = {};
+    var color_count = {"BLACK": 0, "IVORY": 0, "BLUE": 0, "RED": 0, "GREEN": 0, "WHITE": 0};
+    var colors = Object.keys(color_count);
     var lines = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     var rows = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
     for (var r in rows){
         for (var l in lines){
-            var coordinates = new Lyngk.Coordinates(r, l);
-            if (coordinates.is_valid()){
+            var coordinates = new Lyngk.Coordinates(rows[r], lines[l]);
+            if (coordinates.is_valid() === true){
                 var hash = coordinates.hash();
                 var table_coordinates = table.get_coordinates()[hash];
                 color_count[table_coordinates.get_color()] += 1;
