@@ -75,3 +75,18 @@ LyngkTestCase.prototype.testStory8 = function() {
 
     assertTrue((coordinates.get_color() === red_piece.get_color()) && (coordinates.get_state() === "STACK"));
 };
+
+LyngkTestCase.prototype.testStory8 = function() {
+    var coordinates = new Lyngk.Coordinates("A", 3);
+    var blue_piece = new Lyngk.Piece("blue");
+    for (var i = 0; i < 5; i++){
+        coordinates.put(blue_piece);
+        if (i === 0){
+            assertTrue(coordinates.get_state() === "ONE_PIECE");
+        } else if (i < 4) {
+            assertTrue(coordinates.get_state() === "STACK");
+        } else if (i === 4){
+            assertTrue(coordinates.get_state() === "FULL_STACK");
+        }
+    }
+};
