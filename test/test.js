@@ -95,8 +95,8 @@ LyngkTestCase.prototype.testStory11 = function() {
     var table = new Lyngk.Engine();
     var lines = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     var rows = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
-    for (var l in rows){
-        for (var r in rows){
+    for (var r in rows){
+        for (var l in lines){
             var coordinates = new Lyngk.Coordinates(r, l);
             var hash = coordinates.hash();
             var table_coordinates = table.get_coordinates()[hash];
