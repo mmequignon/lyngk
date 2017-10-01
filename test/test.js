@@ -10,12 +10,9 @@ LyngkTestCase.prototype.testStory1 = function() {
 
 LyngkTestCase.prototype.testStory2 = function() {
     var count = 0;
-    var lines = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-    var rows = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
-
-    for (var l in lines){
-      for (var r in rows){
-          var coords = new Lyngk.Coordinates(rows[r], lines[l]);
+    for (var l in Lyngk.Lines){
+      for (var c in Lyngk.Columns){
+          var coords = new Lyngk.Coordinates(Lyngk.Columns[c], Lyngk.Lines[l]);
           if ( coords.is_valid() === true ){
               count++;
           }
@@ -93,14 +90,12 @@ LyngkTestCase.prototype.testStory10 = function() {
 
 LyngkTestCase.prototype.testStory11 = function() {
     var table = new Lyngk.Engine();
-    var lines = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-    var rows = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
-    for (var r in rows){
-        for (var l in lines){
-            var coordinates = new Lyngk.Coordinates(rows[r], lines[l]);
+    for (var l in Lyngk.Lines){
+        for (var c in Lyngk.Columns){
+            var coordinates = new Lyngk.Coordinates(Lyngk.Columns[c], Lyngk.Lines[l]);
             var hash = coordinates.hash();
             var table_coordinates = table.get_coordinates()[hash];
-            if (coordinates.is_valid() == true){
+            if (coordinates.is_valid() === true){
                 assertTrue(table_coordinates.get_state() === "ONE_PIECE");
             }
         }
@@ -111,11 +106,9 @@ LyngkTestCase.prototype.testStory12 = function(){
     var table = new Lyngk.Engine();
     var color_count = {"BLACK": 0, "IVORY": 0, "BLUE": 0, "RED": 0, "GREEN": 0, "WHITE": 0};
     var colors = Object.keys(color_count);
-    var lines = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-    var rows = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
-    for (var r in rows){
-        for (var l in lines){
-            var coordinates = new Lyngk.Coordinates(rows[r], lines[l]);
+    for (var l in Lyngk.Lines){
+        for (var c in Lyngk.Columns){
+            var coordinates = new Lyngk.Coordinates(Lyngk.Columns[c], Lyngk.Lines[l]);
             if (coordinates.is_valid() === true){
                 var hash = coordinates.hash();
                 var table_coordinates = table.get_coordinates()[hash];
