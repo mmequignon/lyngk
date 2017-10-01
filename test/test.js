@@ -95,7 +95,7 @@ LyngkTestCase.prototype.testStory11 = function() {
             var coordinates = new Lyngk.Coordinates(Lyngk.Columns[c], Lyngk.Lines[l]);
             var hash = coordinates.hash();
             var table_coordinates = table.get_coordinates()[hash];
-            if (coordinates.is_valid() == true){
+            if (coordinates.is_valid() === true){
                 assertTrue(table_coordinates.get_state() === "ONE_PIECE");
             }
         }
