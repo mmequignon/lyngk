@@ -55,7 +55,7 @@ Lyngk.Coordinates = function (c, l) {
     };
 
     this.get_color = function(){
-        return private_pieces[private_pieces.length - 1].get_color();
+        return (this.get_count() > 0) ? private_pieces[private_pieces.length - 1].get_color() : "NONE";
     };
 
     this.get_count = function(){
