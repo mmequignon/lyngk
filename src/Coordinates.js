@@ -1,7 +1,7 @@
 "use strict";
 
 Lyngk.Coordinates = function (c, l) {
-    var private_column, private_line, private_state, private_color, private_count, private_pieces;
+    var private_column, private_line, private_pieces;
 
     this.is_valid = function(){
 
@@ -20,8 +20,6 @@ Lyngk.Coordinates = function (c, l) {
     var init = function(c, l){
         private_column = c;
         private_line = l;
-        private_state = "VACANT";
-        private_count = 0;
         private_pieces = [];
     };
 
