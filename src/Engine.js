@@ -12,7 +12,7 @@ Lyngk.Engine = function () {
 
     var get_random_piece = function(){
         var colors = Object.keys(private_pieces);
-        var color = colors[Math.floor(Math.random(colors.length))];
+        var color = colors[Math.floor(Math.random()*colors.length)];
         private_pieces[color] -= 1;
         if (private_pieces[color] === 0){
             delete private_pieces[color];
@@ -26,9 +26,8 @@ Lyngk.Engine = function () {
 
     var init = function(){
         private_pieces = init_pieces();
-        var piece = new Lyngk.Piece("blue");
-        for (var c in Lyngk.Columns){
-            for (var l in Lyngk.Lines){
+        for (var l in Lyngk.Lines){
+            for (var c in Lyngk.Columns){
                 var coordinate = new Lyngk.Coordinates(Lyngk.Columns[c], Lyngk.Lines[l]);
                 if (coordinate.is_valid() === true) {
                     var piece = get_random_piece();
@@ -42,6 +41,20 @@ Lyngk.Engine = function () {
 
     this.get_coordinates = function() {
         return private_coordinates;
+    };
+
+    this.get_color_count = function(){
+        var color_count = {"BLACK": 0, "IVORY": 0, "BLUE": 0, "RED": 0, "GREEN": 0, "WHITE": 0};
+        for (var l in Lyngk.Lines) {
+            for (var c in Lyngk.Columns) {
+                var coordinate = new Lyngk.Coordinates(Lyngk.Columns[c], Lyngk.Lines[l]);
+                if (coordinate.is_valid() === true) {
+                    var pos = coordinate.hash();
+                    color_count[private_coordinates[pos].get_color()] += 1;
+                }
+            }
+        }
+        return color_count;
     };
 
     init();
