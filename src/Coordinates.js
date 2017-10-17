@@ -68,6 +68,10 @@ Lyngk.Coordinates = function (c, l) {
         }
     };
 
+    this.pop = function(piece) {
+        return private_pieces.pop();
+    }
+
     this.get_pieces = function(){
         return private_pieces;
     };
