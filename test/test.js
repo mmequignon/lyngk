@@ -156,3 +156,13 @@ LyngkTestCase.prototype.testStory14 = function(){
     var indice = coordinates.get_count() - 1;
     assertTrue(pieces[indice].get_color() === coordinates.get_color());
 };
+
+LyngkTestCase.prototype.testStory15 = function(){
+    var a3 = new Lyngk.Coordinates("A", 3);
+    var b3 = new Lyngk.Coordinates("B", 3);
+    var blue_piece = new Lyngk.Piece("BLUE");
+    a3.put(blue_piece);
+    b3.put(a3.pop());
+    assertTrue(a3.get_state() === "VACANT");
+    assertTrue(b3.get_color() === blue_piece.get_color());
+}
