@@ -247,3 +247,26 @@ LyngkTestCase.prototype.testStory19 = function(){
                  (h8_init_color === table.get_coordinates()[h8.hash()].get_color()) &&
                  (h8_init_state === table.get_coordinates()[h8.hash()].get_state()) ));
 };
+
+LyngkTestCase.prototype.testStory20 = function(){
+    var table = new Lyngk.Engine();
+    var c1 = new Lyngk.Coordinates("C", 1);
+    var c2 = new Lyngk.Coordinates("C", 2);
+    var c3 = new Lyngk.Coordinates("C", 3);
+    var c4 = new Lyngk.Coordinates("C", 4);
+    var c5 = new Lyngk.Coordinates("C", 5);
+    var c6 = new Lyngk.Coordinates("C", 6);
+    table.move_stack(c1.hash(), c2.hash());
+    table.move_stack(c2.hash(), c3.hash());
+    table.move_stack(c3.hash(), c4.hash());
+    table.move_stack(c4.hash(), c5.hash());
+    var c5_init_color = table.get_coordinates()[c5.hash()].get_color();
+    var c5_init_state = table.get_coordinates()[c5.hash()].get_state();
+    var c6_init_color = table.get_coordinates()[c6.hash()].get_color();
+    var c6_init_state = table.get_coordinates()[c6.hash()].get_state();
+    table.move_stack(c5.hash(), c6.hash());
+    assertTrue(( (c5_init_color === table.get_coordinates()[c5.hash()].get_color()) &&
+                 (c5_init_state === table.get_coordinates()[c5.hash()].get_state()) &&
+                 (c6_init_color === table.get_coordinates()[c6.hash()].get_color()) &&
+                 (c6_init_state === table.get_coordinates()[c6.hash()].get_state()) ));
+};
