@@ -68,9 +68,13 @@ Lyngk.Coordinates = function (c, l) {
         }
     };
 
-    this.pop = function(piece) {
+    this.pop = function() {
         return private_pieces.pop();
-    }
+    };
+
+    this.shift = function(){
+        return private_pieces.shift();
+    };
 
     this.get_pieces = function(){
         return private_pieces;

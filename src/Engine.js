@@ -43,6 +43,13 @@ Lyngk.Engine = function () {
         return private_coordinates;
     };
 
+
+    this.move_stack = function(hash_from, hash_to){
+        while (private_coordinates[hash_from].get_state() !== "VACANT"){
+            private_coordinates[hash_to].put(private_coordinates[hash_from].shift());
+        }
+    };
+
     init();
 };
 

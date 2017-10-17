@@ -167,7 +167,7 @@ LyngkTestCase.prototype.testStory15 = function(){
     assertTrue(b3.get_color() === blue_piece.get_color());
 };
 
-LyngkTestCase.prototype.testStory15 = function(){
+LyngkTestCase.prototype.testStory16 = function(){
     var table = new Lyngk.Engine();
     var b3 = new Lyngk.Coordinates("B", 3);
     var b2 = new Lyngk.Coordinates("B", 2);
@@ -175,4 +175,6 @@ LyngkTestCase.prototype.testStory15 = function(){
     table.move_stack(b3.hash(), b2.hash());
     assertTrue(table.get_coordinates()[b2.hash()].get_count() === 2);
     assertTrue(table.get_coordinates()[b2.hash()].get_color() === from_color);
+    assertTrue(table.get_coordinates()[b3.hash()].get_state() === "VACANT");
 };
+
