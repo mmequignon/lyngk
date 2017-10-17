@@ -270,3 +270,20 @@ LyngkTestCase.prototype.testStory20 = function(){
                  (c6_init_color === table.get_coordinates()[c6.hash()].get_color()) &&
                  (c6_init_state === table.get_coordinates()[c6.hash()].get_state()) ));
 };
+
+LyngkTestCase.prototype.testStory21 = function() {
+    var table = new Lyngk.Engine();
+    var c1 = new Lyngk.Coordinates("C", 1);
+    var c2 = new Lyngk.Coordinates("C", 2);
+    var c3 = new Lyngk.Coordinates("C", 3);
+    table.move_stack(c1.hash(), c2.hash());
+    var c2_init_color = table.get_coordinates()[c2.hash()].get_color();
+    var c2_init_state = table.get_coordinates()[c2.hash()].get_state();
+    var c3_init_color = table.get_coordinates()[c3.hash()].get_color();
+    var c3_init_state = table.get_coordinates()[c3.hash()].get_state();
+    table.move_stack(c3.hash(), c2.hash());
+    assertTrue(( (c2_init_color === table.get_coordinates()[c2.hash()].get_color()) &&
+        (c2_init_state === table.get_coordinates()[c2.hash()].get_state()) &&
+        (c3_init_color === table.get_coordinates()[c3.hash()].get_color()) &&
+        (c3_init_state === table.get_coordinates()[c3.hash()].get_state()) ));
+};
