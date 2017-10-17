@@ -130,3 +130,18 @@ LyngkTestCase.prototype.testStory12 = function(){
         }
     }
 };
+
+LyngkTestCase.prototype.testStory13 = function(){
+    var table = new Lyngk.Engine();
+    for (var l in Lyngk.Lines){
+        for (var c in Lyngk.Columns){
+            var coordinates = new Lyngk.Coordinates(Lyngk.Columns[c], Lyngk.Lines[l]);
+            if (coordinates.is_valid() === true){
+                var hash = coordinates.hash();
+                var pieces = table.get_coordinates()[hash].get_pieces();
+                assertTrue(Array.isArray(pieces) === true);
+                assertTrue(pieces.length === 1);
+            }
+        }
+    }
+}
