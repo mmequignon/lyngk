@@ -43,19 +43,6 @@ Lyngk.Engine = function () {
         return private_coordinates;
     };
 
-    this.get_color_count = function(){
-        var color_count = {"BLACK": 0, "IVORY": 0, "BLUE": 0, "RED": 0, "GREEN": 0, "WHITE": 0};
-        for (var l in Lyngk.Lines) {
-            for (var c in Lyngk.Columns) {
-                var coordinate = new Lyngk.Coordinates(Lyngk.Columns[c], Lyngk.Lines[l]);
-                if (coordinate.is_valid() === true) {
-                    var pos = coordinate.hash();
-                    color_count[private_coordinates[pos].get_color()] += 1;
-                }
-            }
-        }
-        return color_count;
-    };
-
     init();
 };
+
