@@ -165,4 +165,14 @@ LyngkTestCase.prototype.testStory15 = function(){
     b3.put(a3.pop());
     assertTrue(a3.get_state() === "VACANT");
     assertTrue(b3.get_color() === blue_piece.get_color());
-}
+};
+
+LyngkTestCase.prototype.testStory15 = function(){
+    var table = new Lyngk.Engine();
+    var b3 = new Lyngk.Coordinates("B", 3);
+    var b2 = new Lyngk.Coordinates("B", 2);
+    var from_color = table.get_coordinates()[b3.hash()].get_color();
+    table.move_stack(b3.hash(), b2.hash());
+    assertTrue(table.get_coordinates()[b2.hash()].get_count() === 2);
+    assertTrue(table.get_coordinates()[b2.hash()].get_color() === from_color);
+};
