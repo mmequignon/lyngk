@@ -191,3 +191,37 @@ LyngkTestCase.prototype.testStory17 = function(){
     assertTrue(( (b2_init_color === b2.get_color()) && (b2_init_state === b2.get_state()) && (b3_init_color === b3.get_color()) && (b3_init_state === b3.get_state())));
 };
 
+LyngkTestCase.prototype.testStory18 = function(){
+    var table = new Lyngk.Engine();
+    var b3 = new Lyngk.Coordinates("B", 3);
+    var c1 = new Lyngk.Coordinates("C", 1);
+    var c1_init_color = table.get_coordinates()[c1.hash()].get_color();
+    var c1_init_state = table.get_coordinates()[c1.hash()].get_state();
+    var b3_init_color = table.get_coordinates()[b3.hash()].get_color();
+    var b3_init_state = table.get_coordinates()[b3.hash()].get_state();
+    table.move_stack(b3.hash(), c1.hash());
+    // Invalid move
+    assertTrue(( (c1_init_color === table.get_coordinates()[c1.hash()].get_color()) &&
+                 (c1_init_state === table.get_coordinates()[c1.hash()].get_state()) &&
+                 (b3_init_color === table.get_coordinates()[b3.hash()].get_color()) &&
+                 (b3_init_state === table.get_coordinates()[b3.hash()].get_state())));
+    var b2 = new Lyngk.Coordinates("B", 2);
+    var b2_init_color = table.get_coordinates()[b2.hash()].get_color();
+    var b2_init_state = table.get_coordinates()[b2.hash()].get_state();
+    table.move_stack(b3.hash(), b2.hash());
+    // Valid moves
+    assertFalse(( (b2_init_color === table.get_coordinates()[b2.hash()].get_color()) &&
+                  (b2_init_state === table.get_coordinates()[b2.hash()].get_state()) &&
+                  (b3_init_color === table.get_coordinates()[b3.hash()].get_color()) &&
+                  (b3_init_state === table.get_coordinates()[b3.hash()].get_state())));
+    var d2 = new Lyngk.Coordinates("D", 2);
+    b2_init_color = table.get_coordinates()[b2.hash()].get_color();
+    b2_init_state = table.get_coordinates()[b2.hash()].get_state();
+    var d2_init_color = table.get_coordinates()[d2.hash()].get_color();
+    var d2_init_state = table.get_coordinates()[d2.hash()].get_state();
+    table.move_stack(b2.hash(), d2.hash());
+    assertFalse(( (b2_init_color === table.get_coordinates()[b2.hash()].get_color()) &&
+                  (b2_init_state === table.get_coordinates()[b2.hash()].get_state()) &&
+                  (d2_init_color === table.get_coordinates()[d2.hash()].get_color()) &&
+                  (d2_init_state === table.get_coordinates()[d2.hash()].get_state())));
+};
