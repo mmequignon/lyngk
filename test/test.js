@@ -144,4 +144,15 @@ LyngkTestCase.prototype.testStory13 = function(){
             }
         }
     }
-}
+};
+
+LyngkTestCase.prototype.testStory14 = function(){
+    var coordinates = new Lyngk.Coordinates("A", 3);
+    var blue_piece = new Lyngk.Piece("BLUE");
+    coordinates.put(blue_piece);
+    var red_piece = new Lyngk.Piece("RED");
+    coordinates.put(red_piece);
+    var pieces = coordinates.get_pieces();
+    var indice = coordinates.get_count() - 1;
+    assertTrue(pieces[indice].get_color() === coordinates.get_color());
+};
