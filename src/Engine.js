@@ -60,7 +60,7 @@ Lyngk.Engine = function () {
 
 
     this.move_is_valid = function(hash_from, hash_to){
-        var is_neighbour = ( (Math.abs(hash_from - hash_to) === 1 ) || (Math.abs(hash_from - hash_to) === 10) );
+        var is_neighbour = [1, 9, 10].indexOf(Math.abs(hash_from - hash_to)) > -1;
         return is_neighbour && (this.get_coordinates()[hash_from].get_state() !== "FULL_STACK");
     };
 
