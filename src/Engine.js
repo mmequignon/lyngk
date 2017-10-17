@@ -60,9 +60,8 @@ Lyngk.Engine = function () {
 
 
     this.move_is_valid = function(hash_from, hash_to){
-        var on_the_same_column = (String(hash_from).slice(0, 2) === String(hash_to).slice(0, 2));
-        var on_the_same_line = (String(hash_from).slice(2) === String(hash_to).slice(2));
-        return (on_the_same_column || on_the_same_line);
+        var is_neighbour = ( (Math.abs(hash_from - hash_to) === 1 ) || (Math.abs(hash_from - hash_to) === 10) );
+        return is_neighbour;
     };
 
     init();

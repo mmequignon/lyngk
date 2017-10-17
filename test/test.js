@@ -229,7 +229,7 @@ LyngkTestCase.prototype.testStory18 = function(){
                   (c2_init_state === table.get_coordinates()[c2.hash()].get_state())));
 };
 
-LyngkTestCase.prototype.testStory20 = function(){
+LyngkTestCase.prototype.testStory19 = function(){
     var table = new Lyngk.Engine();
     var h8 = new Lyngk.Coordinates("H", 8);
     var h7 = new Lyngk.Coordinates("H", 7);
