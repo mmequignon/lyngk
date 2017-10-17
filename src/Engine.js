@@ -45,8 +45,13 @@ Lyngk.Engine = function () {
 
 
     this.move_stack = function(hash_from, hash_to){
-        while (private_coordinates[hash_from].get_state() !== "VACANT"){
-            private_coordinates[hash_to].put(private_coordinates[hash_from].shift());
+        if (private_coordinates[hash_to].get_state() !== "VACANT") {
+            if (private_coordinates[hash_to].get_state() === "ONE_PIECE"){
+                private_coordinates[hash_to].put(private_coordinates[hash_from].pop());
+            }
+            while (private_coordinates[hash_from].get_state() !== "VACANT") {
+                private_coordinates[hash_to].put(private_coordinates[hash_from].shift());
+            }
         }
     };
 
