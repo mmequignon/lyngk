@@ -45,14 +45,24 @@ Lyngk.Engine = function () {
 
 
     this.move_stack = function(hash_from, hash_to){
-        if (private_coordinates[hash_to].get_state() !== "VACANT") {
-            if (private_coordinates[hash_to].get_state() === "ONE_PIECE"){
+        if ((private_coordinates[hash_to].get_state() !== "VACANT") &&
+                (this.move_is_valid(hash_from, hash_to) === true)) {
+            if (private_coordinates[hash_from].get_state() === "ONE_PIECE"){
                 private_coordinates[hash_to].put(private_coordinates[hash_from].pop());
             }
-            while (private_coordinates[hash_from].get_state() !== "VACANT") {
-                private_coordinates[hash_to].put(private_coordinates[hash_from].shift());
+            else {
+                while (private_coordinates[hash_from].get_state() !== "VACANT") {
+                    private_coordinates[hash_to].put(private_coordinates[hash_from].shift());
+                }
             }
         }
+    };
+
+
+    this.move_is_valid = function(hash_from, hash_to){
+        var on_the_same_column = (String(hash_from).slice(0, 2) === String(hash_to).slice(0, 2));
+        var on_the_same_line = (String(hash_from).slice(2) === String(hash_to).slice(2));
+        return (on_the_same_column || on_the_same_line);
     };
 
     init();
