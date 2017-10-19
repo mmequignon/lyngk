@@ -23,11 +23,7 @@ Lyngk.Coordinates = function (c, l) {
     };
 
     this.representation = function(){
-        if (this.is_valid() === false) {
-            return "invalid";
-        } else {
-            return private_column + private_line;
-        }
+        return (this.is_valid() === false) ? "invalid" : private_column + private_line;
     };
 
     this.clone = function(){

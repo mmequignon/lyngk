@@ -11,18 +11,8 @@ Lyngk.Intersection = function (c) {
     }
 
     this.get_state = function(){
-        if (private_pieces.length === 0){
-            return "VACANT";
-        }
-        else if (private_pieces.length === 5){
-            return "FULL_STACK";
-        }
-        else if (private_pieces.length === 1){
-            return "ONE_PIECE";
-        }
-        else{
-            return "STACK";
-        }
+        var length = private_pieces.length;
+        return (length === 0) ? "VACANT" : (length === 5) ? "FULL_STACK" : (length === 1) ? "ONE_PIECE" : "STACK";
     };
 
     this.get_color = function(){

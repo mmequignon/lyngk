@@ -48,13 +48,8 @@ Lyngk.Engine = function () {
     this.move_stack = function(hash_from, hash_to){
         if ((private_intersections[hash_to].get_state() !== "VACANT") &&
                 (this.move_is_valid(hash_from, hash_to) === true)) {
-            if (private_intersections[hash_from].get_state() === "ONE_PIECE"){
-                private_intersections[hash_to].put(private_intersections[hash_from].pop());
-            }
-            else {
-                while (private_intersections[hash_from].get_state() !== "VACANT") {
-                    private_intersections[hash_to].put(private_intersections[hash_from].shift());
-                }
+            while (private_intersections[hash_from].get_state() !== "VACANT") {
+                private_intersections[hash_to].put(private_intersections[hash_from].shift());
             }
         }
     };
@@ -62,7 +57,8 @@ Lyngk.Engine = function () {
 
     this.move_is_valid = function(hash_from, hash_to){
         var is_neighbour = [1, 9, 10].indexOf(Math.abs(hash_from - hash_to)) > -1;
-        return is_neighbour && (this.get_intersections()[hash_from].get_state() !== "FULL_STACK");
+        var from_state = this.get_intersections()[hash_from].get_state();
+        return is_neighbour && (from_state !== "FULL_STACK");
     };
 
     init();
