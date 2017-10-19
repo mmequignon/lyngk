@@ -6,7 +6,7 @@ Lyngk.Lines = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 Lyngk.Columns = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
 
 Lyngk.Engine = function () {
-    var private_coordinates = [];
+    var private_intersections = [];
     var private_pieces;
 
 
@@ -30,29 +30,30 @@ Lyngk.Engine = function () {
             for (var c in Lyngk.Columns){
                 var coordinate = new Lyngk.Coordinates(Lyngk.Columns[c], Lyngk.Lines[l]);
                 if (coordinate.is_valid() === true) {
+                    var intersection = new Lyngk.Intersection(coordinate);
                     var piece = get_random_piece();
-                    coordinate.put(piece);
+                    intersection.put(piece);
                     var pos = coordinate.hash();
-                    private_coordinates[pos] = coordinate;
+                    private_intersections[pos] = intersection;
                 }
             }
         }
     };
 
-    this.get_coordinates = function() {
-        return private_coordinates;
+    this.get_intersections = function() {
+        return private_intersections;
     };
 
 
     this.move_stack = function(hash_from, hash_to){
-        if ((private_coordinates[hash_to].get_state() !== "VACANT") &&
+        if ((private_intersections[hash_to].get_state() !== "VACANT") &&
                 (this.move_is_valid(hash_from, hash_to) === true)) {
-            if (private_coordinates[hash_from].get_state() === "ONE_PIECE"){
-                private_coordinates[hash_to].put(private_coordinates[hash_from].pop());
+            if (private_intersections[hash_from].get_state() === "ONE_PIECE"){
+                private_intersections[hash_to].put(private_intersections[hash_from].pop());
             }
             else {
-                while (private_coordinates[hash_from].get_state() !== "VACANT") {
-                    private_coordinates[hash_to].put(private_coordinates[hash_from].shift());
+                while (private_intersections[hash_from].get_state() !== "VACANT") {
+                    private_intersections[hash_to].put(private_intersections[hash_from].shift());
                 }
             }
         }
@@ -61,7 +62,7 @@ Lyngk.Engine = function () {
 
     this.move_is_valid = function(hash_from, hash_to){
         var is_neighbour = [1, 9, 10].indexOf(Math.abs(hash_from - hash_to)) > -1;
-        return is_neighbour && (this.get_coordinates()[hash_from].get_state() !== "FULL_STACK");
+        return is_neighbour && (this.get_intersections()[hash_from].get_state() !== "FULL_STACK");
     };
 
     init();
