@@ -319,3 +319,17 @@ LyngkTestCase.prototype.testStory22 = function(){
                 (g6_init_color === table.get_intersections()[g6.hash()].get_color()) &&
                 (g6_init_state === table.get_intersections()[g6.hash()].get_state()));
 };
+
+LyngkTestCase.prototype.testStory23 = function(){
+    var table = new Lyngk.Engine();
+    var g3 = new Lyngk.Coordinates("G", 3);
+    var g4 = new Lyngk.Coordinates("G", 4);
+    table.move_stack(g3.hash(), g4.hash());
+    var g5 = new Lyngk.Coordinates("G", 5);
+    table.move_stack(g4.hash(), g5.hash());
+    var g6 = new Lyngk.Coordinates("G", 6);
+    table.move_stack(g5.hash(), g6.hash());
+    var g7 = new Lyngk.Coordinates("G", 7);
+    table.move_stack(g6.hash(), g7.hash());
+    assertTrue(table.get_intersections()[g7.hash()].get_count() !== 5);
+};
