@@ -25,6 +25,7 @@ Lyngk.Engine = function () {
     };
 
     var init = function(){
+        Math.seedrandom('isidis-i2l');
         private_pieces = init_pieces();
         for (var l in Lyngk.Lines){
             for (var c in Lyngk.Columns){
