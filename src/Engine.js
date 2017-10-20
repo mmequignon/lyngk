@@ -61,7 +61,30 @@ Lyngk.Engine = function () {
         var is_neighbour = [1, 9, 10].indexOf(Math.abs(hash_from - hash_to)) > -1;
         var from_state = intersections[hash_from].get_state();
         var inferior_size = (intersections[hash_from].get_count() - intersections[hash_to].get_count());
-        return (is_neighbour && (from_state !== "FULL_STACK") && (inferior_size > -1));
+        var from_stack_colors = [];
+        var from_pieces = intersections[hash_from].get_pieces();
+        var to_pieces = intersections[hash_to].get_pieces();
+        for (var piece in from_pieces){
+            from_stack_colors += from_pieces[piece].get_color();
+        }
+        var to_stack_colors = [];
+        for (var piece in to_pieces){
+            to_stack_colors += to_pieces[piece].get_color();
+        }
+        var not_color_double = true;
+        for (var color in to_stack_colors){
+            if (to_stack_colors[color] === "WHITE"){
+                continue;
+            }
+            if (from_stack_colors.indexOf(to_stack_colors[color]) > -1){
+                not_color_double = false;
+                break;
+            }
+        }
+        return (is_neighbour &&
+                from_state !== "FULL_STACK" &&
+                inferior_size > -1 &&
+                not_color_double === false);
     };
 
     init();
