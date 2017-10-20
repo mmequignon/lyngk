@@ -56,9 +56,12 @@ Lyngk.Engine = function () {
 
 
     this.move_is_valid = function(hash_from, hash_to){
+        var intersections = this.get_intersections();
         var is_neighbour = [1, 9, 10].indexOf(Math.abs(hash_from - hash_to)) > -1;
-        var from_state = this.get_intersections()[hash_from].get_state();
-        return is_neighbour && (from_state !== "FULL_STACK");
+        var from_state = intersections[hash_from].get_state();
+        var one_on_stack = ( (intersections[hash_from].get_state() === "ONE_PIECE") &&
+                             (["STACK", "FULL_STACK"].indexOf(intersections[hash_to].get_state()) > -1));
+        return is_neighbour && (from_state !== "FULL_STACK") && (one_on_stack === false);
     };
 
     init();
