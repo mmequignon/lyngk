@@ -60,7 +60,6 @@ Lyngk.Engine = function () {
         var is_neighbour = [1, 9, 10].indexOf(Math.abs(hash_from - hash_to)) > -1;
         var from_state = intersections[hash_from].get_state();
         var inferior_size = (intersections[hash_from].get_count() - intersections[hash_to].get_count());
-        console.log(inferior_size);
         return (is_neighbour && (from_state !== "FULL_STACK") && (inferior_size > -1));
     };
 
