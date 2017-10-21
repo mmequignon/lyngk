@@ -301,23 +301,23 @@ LyngkTestCase.prototype.testStory21 = function() {
 
 LyngkTestCase.prototype.testStory22 = function(){
     var table = new Lyngk.Engine();
-    var i7 = new Lyngk.Coordinates("I", 7);
-    var h6 = new Lyngk.Coordinates("H", 6);
-    table.move_stack(i7.hash(), h6.hash());
-    var g4 = new Lyngk.Coordinates("G", 4);
-    var g5 = new Lyngk.Coordinates("G", 5);
-    var g6 = new Lyngk.Coordinates("G", 6);
-    table.move_stack(g4.hash(), g5.hash());
-    table.move_stack(g5.hash(), g6.hash());
-    var h6_init_color = table.get_intersections()[h6.hash()].get_color();
-    var h6_init_state = table.get_intersections()[h6.hash()].get_state();
-    var g6_init_color = table.get_intersections()[g6.hash()].get_color();
-    var g6_init_state = table.get_intersections()[g6.hash()].get_state();
-    table.move_stack(h6.hash(), g6.hash());
-    assertTrue( (h6_init_color === table.get_intersections()[h6.hash()].get_color()) &&
-                (h6_init_state === table.get_intersections()[h6.hash()].get_state()) &&
-                (g6_init_color === table.get_intersections()[g6.hash()].get_color()) &&
-                (g6_init_state === table.get_intersections()[g6.hash()].get_state()));
+    var d2 = new Lyngk.Coordinates("D", 2);
+    var d3 = new Lyngk.Coordinates("D", 3);
+    table.move_stack(d2.hash(), d3.hash());
+    var c1 = new Lyngk.Coordinates("C", 1);
+    var c2 = new Lyngk.Coordinates("C", 2);
+    var c3 = new Lyngk.Coordinates("C", 3);
+    table.move_stack(c1.hash(), c2.hash());
+    table.move_stack(c2.hash(), c3.hash());
+    var d3_init_color = table.get_intersections()[d3.hash()].get_color();
+    var d3_init_state = table.get_intersections()[d3.hash()].get_state();
+    var c3_init_color = table.get_intersections()[c3.hash()].get_color();
+    var c3_init_state = table.get_intersections()[c3.hash()].get_state();
+    table.move_stack(d3.hash(), c3.hash());
+    assertTrue( (d3_init_color === table.get_intersections()[d3.hash()].get_color()) &&
+                (d3_init_state === table.get_intersections()[d3.hash()].get_state()) &&
+                (c3_init_color === table.get_intersections()[c3.hash()].get_color()) &&
+                (c3_init_state === table.get_intersections()[c3.hash()].get_state()));
 };
 
 LyngkTestCase.prototype.testStory23 = function(){
