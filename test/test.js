@@ -333,3 +333,8 @@ LyngkTestCase.prototype.testStory23 = function(){
     table.move_stack(g6.hash(), g7.hash());
     assertTrue(table.get_intersections()[g7.hash()].get_count() !== 5);
 };
+
+LyngkTestCase.prototype.testStory24 = function(){
+    var game = new Lyngk.Game();
+    assertTrue(game.get_current_player() === 'Joueur 1');
+};
