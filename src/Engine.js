@@ -91,3 +91,17 @@ Lyngk.Engine = function () {
     init();
 };
 
+Lyngk.Game = function() {
+    var private_players = ['Joueur 1', 'Joueur 2'];
+    var private_turn;
+
+    var init = function(){
+        private_turn = 0;
+    };
+
+    this.get_current_player = function(){
+        return private_players[private_turn % 2];
+    };
+
+    init();
+};
