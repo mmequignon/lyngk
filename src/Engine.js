@@ -94,20 +94,32 @@ Lyngk.Engine = function () {
 Lyngk.Game = function() {
     var private_players = ['Joueur 1', 'Joueur 2'];
     var private_player_colors;
+    var private_scores;
     var private_engine;
     var private_turn;
 
     var init = function(){
         private_engine = new Lyngk.Engine();
         private_player_colors = [];
+        private_scores = [0, 0];
         private_turn = 0;
     };
 
     this.move = function(hash_from, hash_to){
         if (private_engine.move_is_valid(hash_from, hash_to) === true) {
             private_engine.move_stack(hash_from, hash_to);
+            if(player_get_point(hash_to, this.get_player_color(private_turn % 2))){
+                private_scores[private_turn % 2] += 1;
+                private_engine.get_intersections()[hash_to].flush();
+            }
             private_turn += 1;
         }
+    };
+
+    var player_get_point = function(hash, color){
+        var stack_is_full = (private_engine.get_intersections()[hash].get_state() === 'FULL_STACK');
+        var same_color = (private_engine.get_intersections()[hash].get_color() === color);
+        return (stack_is_full && same_color);
     };
 
     this.get_current_player = function(){
@@ -120,6 +132,14 @@ Lyngk.Game = function() {
 
     this.get_player_color = function(player){
         return private_player_colors[player];
+    };
+
+    this.get_intersections = function(){
+        return private_engine.get_intersections();
+    };
+
+    this.get_player_score = function(player){
+        return private_scores[player];
     };
 
     init();

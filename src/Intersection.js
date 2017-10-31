@@ -37,6 +37,10 @@ Lyngk.Intersection = function (c) {
         return private_pieces.shift();
     };
 
+    this.flush = function(){
+        private_pieces = [];
+    };
+
     this.get_pieces = function(){
         return private_pieces;
     };
