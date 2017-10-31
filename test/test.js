@@ -346,3 +346,14 @@ LyngkTestCase.prototype.testStory25 = function(){
     game.move(g3.hash(), g4.hash());
     assertTrue(game.get_current_player() === 'Joueur 2');
 };
+
+LyngkTestCase.prototype.testStory26 = function(){
+    var game = new Lyngk.Game();
+    game.ask_color('BLUE');
+    var a3 = new Lyngk.Coordinates("A", 3);
+    var b3 = new Lyngk.Coordinates("B", 3);
+    game.move(a3.hash(), b3.hash());
+    game.ask_color('GREEN');
+    assertTrue(game.get_player_color(0) === 'BLUE');
+    assertTrue(game.get_player_color(1) === 'GREEN');
+};
