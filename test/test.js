@@ -338,3 +338,11 @@ LyngkTestCase.prototype.testStory24 = function(){
     var game = new Lyngk.Game();
     assertTrue(game.get_current_player() === 'Joueur 1');
 };
+
+LyngkTestCase.prototype.testStory25 = function(){
+    var game = new Lyngk.Game();
+    var g3 = new Lyngk.Coordinates("G", 3);
+    var g4 = new Lyngk.Coordinates("G", 4);
+    game.move(g3.hash(), g4.hash());
+    assertTrue(game.get_current_player() === 'Joueur 2');
+};
