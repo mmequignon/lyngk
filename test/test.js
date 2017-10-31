@@ -357,3 +357,35 @@ LyngkTestCase.prototype.testStory26 = function(){
     assertTrue(game.get_player_color(0) === 'BLUE');
     assertTrue(game.get_player_color(1) === 'GREEN');
 };
+
+LyngkTestCase.prototype.testStory27 = function(){
+    var game = new Lyngk.Game();
+    var c3 = new Lyngk.Coordinates("C", 3);
+    var d3 = new Lyngk.Coordinates("D", 3);
+    var e3 = new Lyngk.Coordinates("E", 3);
+    var f3 = new Lyngk.Coordinates("F", 3);
+    var g3 = new Lyngk.Coordinates("G", 3);
+    var c5 = new Lyngk.Coordinates("C", 5);
+    var d5 = new Lyngk.Coordinates("D", 5);
+    var e5 = new Lyngk.Coordinates("E", 5);
+    var f5 = new Lyngk.Coordinates("F", 5);
+    game.ask_color("BLUE");
+    game.move(c3.hash(), d3.hash());
+    game.move(c5.hash(), d5.hash());
+    game.move(d3.hash(), e3.hash());
+    game.move(d5.hash(), e5.hash());
+    game.move(e3.hash(), f3.hash());
+    game.move(e5.hash(), f5.hash());
+    game.move(f3.hash(), g3.hash());
+    assertTrue(game.get_player_score(0) === 1);
+    var count = 0;
+    for (var l in Lyngk.Lines){
+        for (var c in Lyngk.Columns){
+            var coordinate = new Lyngk.Coordinates(Lyngk.Columns[c], Lyngk.Lines[l]);
+            if (coordinate.is_valid()){
+                count += game.get_intersections()[coordinate.hash()].get_count();
+            }
+        }
+    }
+    assertTrue(count === 38);
+};
