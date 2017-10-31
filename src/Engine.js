@@ -93,11 +93,13 @@ Lyngk.Engine = function () {
 
 Lyngk.Game = function() {
     var private_players = ['Joueur 1', 'Joueur 2'];
+    var private_player_colors;
     var private_engine;
     var private_turn;
 
     var init = function(){
         private_engine = new Lyngk.Engine();
+        private_player_colors = [];
         private_turn = 0;
     };
 
@@ -110,6 +112,14 @@ Lyngk.Game = function() {
 
     this.get_current_player = function(){
         return private_players[private_turn % 2];
+    };
+
+    this.ask_color = function(color){
+        private_player_colors[private_turn % 2] = color;
+    };
+
+    this.get_player_color = function(player){
+        return private_player_colors[player];
     };
 
     init();
