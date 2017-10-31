@@ -93,10 +93,19 @@ Lyngk.Engine = function () {
 
 Lyngk.Game = function() {
     var private_players = ['Joueur 1', 'Joueur 2'];
+    var private_engine;
     var private_turn;
 
     var init = function(){
+        private_engine = new Lyngk.Engine();
         private_turn = 0;
+    };
+
+    this.move = function(hash_from, hash_to){
+        if (private_engine.move_is_valid(hash_from, hash_to) === true) {
+            private_engine.move_stack(hash_from, hash_to);
+            private_turn += 1;
+        }
     };
 
     this.get_current_player = function(){
