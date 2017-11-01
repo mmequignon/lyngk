@@ -66,6 +66,23 @@ Lyngk.Engine = function () {
         }
     };
 
+    this.not_opponent_color_in_stacks = function (hash_from, hash_to){
+        var from_intersection = private_intersections[hash_from];
+        var to_intersection = private_intersections[hash_to];
+        var opponent_color = private_player_colors[(private_turn + 1) % 2];
+        for (var from_piece in from_intersection.get_pieces()){
+            if( from_intersection.get_pieces()[from_piece].get_color() === opponent_color ){
+                return false;
+            }
+        }
+        for (var to_piece in to_intersection.get_pieces()){
+            if ( to_intersection.get_pieces()[to_piece].get_color() === opponent_color ){
+                return false;
+            }
+        }
+        return true;
+    };
+
 
     this.move_is_valid = function(hash_from, hash_to){
         var intersections = this.get_intersections();
@@ -97,6 +114,7 @@ Lyngk.Engine = function () {
                 move_to_stack &&
                 sum_from_to <= 5 &&
                 inferior_size > -1 &&
+                this.not_opponent_color_in_stacks(hash_from, hash_to) &&
                 not_color_double === false);
     };
 
