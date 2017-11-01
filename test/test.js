@@ -389,3 +389,23 @@ LyngkTestCase.prototype.testStory27 = function(){
     }
     assertTrue(count === 38);
 };
+
+LyngkTestCase.prototype.testStory27 = function(){
+    var engine = new Lyngk.Engine();
+    var c3 = new Lyngk.Coordinates("C", 3);
+    var d3 = new Lyngk.Coordinates("D", 3);
+    var e3 = new Lyngk.Coordinates("E", 3);
+    engine.ask_color("BLUE");
+    engine.move_stack(c3.hash(), d3.hash());
+    var d3_init_count = engine.get_intersections()[d3.hash()].get_count();
+    var d3_init_color = engine.get_intersections()[d3.hash()].get_color();
+    var e3_init_count = engine.get_intersections()[e3.hash()].get_count();
+    var e3_init_color = engine.get_intersections()[e3.hash()].get_color();
+    engine.move_stack(d3.hash(), e3.hash());
+    assertTrue(
+        (engine.get_intersections()[d3.hash()].get_count() === d3_init_count) &&
+        (engine.get_intersections()[d3.hash()].get_color() === d3_init_color) &&
+        (engine.get_intersections()[e3.hash()].get_count() === e3_init_count) &&
+        (engine.get_intersections()[e3.hash()].get_color() === e3_init_color)
+    );
+};
