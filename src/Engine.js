@@ -8,6 +8,10 @@ Lyngk.Columns = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
 Lyngk.Engine = function () {
     var private_intersections = [];
     var private_pieces;
+    var private_players = ['Joueur 1', 'Joueur 2'];
+    var private_player_colors;
+    var private_player_scores;
+    var private_turn;
 
 
     var get_random_piece = function(){
@@ -27,6 +31,9 @@ Lyngk.Engine = function () {
     var init = function(){
         Math.seedrandom('isidis-i2l');
         private_pieces = init_pieces();
+        private_player_colors = [];
+        private_player_scores = [0, 0];
+        private_turn = 0;
         for (var l in Lyngk.Lines){
             for (var c in Lyngk.Columns){
                 var coordinate = new Lyngk.Coordinates(Lyngk.Columns[c], Lyngk.Lines[l]);
@@ -51,6 +58,11 @@ Lyngk.Engine = function () {
             while (private_intersections[hash_from].get_state() !== "VACANT") {
                 private_intersections[hash_to].put(private_intersections[hash_from].shift());
             }
+            if (this.player_get_point(hash_to, this.get_player_color(private_turn % 2))){
+                private_player_scores[private_turn % 2] += 1;
+                private_intersections[hash_to].flush();
+            }
+            private_turn += 1;
         }
     };
 
@@ -88,37 +100,9 @@ Lyngk.Engine = function () {
                 not_color_double === false);
     };
 
-    init();
-};
-
-Lyngk.Game = function() {
-    var private_players = ['Joueur 1', 'Joueur 2'];
-    var private_player_colors;
-    var private_scores;
-    var private_engine;
-    var private_turn;
-
-    var init = function(){
-        private_engine = new Lyngk.Engine();
-        private_player_colors = [];
-        private_scores = [0, 0];
-        private_turn = 0;
-    };
-
-    this.move = function(hash_from, hash_to){
-        if (private_engine.move_is_valid(hash_from, hash_to) === true) {
-            private_engine.move_stack(hash_from, hash_to);
-            if(player_get_point(hash_to, this.get_player_color(private_turn % 2))){
-                private_scores[private_turn % 2] += 1;
-                private_engine.get_intersections()[hash_to].flush();
-            }
-            private_turn += 1;
-        }
-    };
-
-    var player_get_point = function(hash, color){
-        var stack_is_full = (private_engine.get_intersections()[hash].get_state() === 'FULL_STACK');
-        var same_color = (private_engine.get_intersections()[hash].get_color() === color);
+    this.player_get_point = function(hash, color){
+        var stack_is_full = (private_intersections[hash].get_state() === 'FULL_STACK');
+        var same_color = (private_intersections[hash].get_color() === color);
         return (stack_is_full && same_color);
     };
 
@@ -134,12 +118,8 @@ Lyngk.Game = function() {
         return private_player_colors[player];
     };
 
-    this.get_intersections = function(){
-        return private_engine.get_intersections();
-    };
-
     this.get_player_score = function(player){
-        return private_scores[player];
+        return private_player_scores[player];
     };
 
     init();

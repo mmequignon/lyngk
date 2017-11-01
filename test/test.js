@@ -335,31 +335,31 @@ LyngkTestCase.prototype.testStory23 = function(){
 };
 
 LyngkTestCase.prototype.testStory24 = function(){
-    var game = new Lyngk.Game();
-    assertTrue(game.get_current_player() === 'Joueur 1');
+    var engine = new Lyngk.Engine();
+    assertTrue(engine.get_current_player() === 'Joueur 1');
 };
 
 LyngkTestCase.prototype.testStory25 = function(){
-    var game = new Lyngk.Game();
+    var engine = new Lyngk.Engine();
     var g3 = new Lyngk.Coordinates("G", 3);
     var g4 = new Lyngk.Coordinates("G", 4);
-    game.move(g3.hash(), g4.hash());
-    assertTrue(game.get_current_player() === 'Joueur 2');
+    engine.move_stack(g3.hash(), g4.hash());
+    assertTrue(engine.get_current_player() === 'Joueur 2');
 };
 
 LyngkTestCase.prototype.testStory26 = function(){
-    var game = new Lyngk.Game();
-    game.ask_color('BLUE');
+    var engine = new Lyngk.Engine();
+    engine.ask_color('BLUE');
     var a3 = new Lyngk.Coordinates("A", 3);
     var b3 = new Lyngk.Coordinates("B", 3);
-    game.move(a3.hash(), b3.hash());
-    game.ask_color('GREEN');
-    assertTrue(game.get_player_color(0) === 'BLUE');
-    assertTrue(game.get_player_color(1) === 'GREEN');
+    engine.move_stack(a3.hash(), b3.hash());
+    engine.ask_color('GREEN');
+    assertTrue(engine.get_player_color(0) === 'BLUE');
+    assertTrue(engine.get_player_color(1) === 'GREEN');
 };
 
 LyngkTestCase.prototype.testStory27 = function(){
-    var game = new Lyngk.Game();
+    var engine = new Lyngk.Engine();
     var c3 = new Lyngk.Coordinates("C", 3);
     var d3 = new Lyngk.Coordinates("D", 3);
     var e3 = new Lyngk.Coordinates("E", 3);
@@ -369,21 +369,21 @@ LyngkTestCase.prototype.testStory27 = function(){
     var d5 = new Lyngk.Coordinates("D", 5);
     var e5 = new Lyngk.Coordinates("E", 5);
     var f5 = new Lyngk.Coordinates("F", 5);
-    game.ask_color("BLUE");
-    game.move(c3.hash(), d3.hash());
-    game.move(c5.hash(), d5.hash());
-    game.move(d3.hash(), e3.hash());
-    game.move(d5.hash(), e5.hash());
-    game.move(e3.hash(), f3.hash());
-    game.move(e5.hash(), f5.hash());
-    game.move(f3.hash(), g3.hash());
-    assertTrue(game.get_player_score(0) === 1);
+    engine.ask_color("BLUE");
+    engine.move_stack(c3.hash(), d3.hash());
+    engine.move_stack(c5.hash(), d5.hash());
+    engine.move_stack(d3.hash(), e3.hash());
+    engine.move_stack(d5.hash(), e5.hash());
+    engine.move_stack(e3.hash(), f3.hash());
+    engine.move_stack(e5.hash(), f5.hash());
+    engine.move_stack(f3.hash(), g3.hash());
+    assertTrue(engine.get_player_score(0) === 1);
     var count = 0;
     for (var l in Lyngk.Lines){
         for (var c in Lyngk.Columns){
             var coordinate = new Lyngk.Coordinates(Lyngk.Columns[c], Lyngk.Lines[l]);
             if (coordinate.is_valid()){
-                count += game.get_intersections()[coordinate.hash()].get_count();
+                count += engine.get_intersections()[coordinate.hash()].get_count();
             }
         }
     }
