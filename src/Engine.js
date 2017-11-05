@@ -83,39 +83,45 @@ Lyngk.Engine = function () {
         return true;
     };
 
+    this.is_neighbour = function (hash_from, hash_to) {
+        return [1, 9, 10].indexOf(Math.abs(hash_from - hash_to)) > -1;
+    };
+
+    this.target_not_vacant = function (hash_to) {
+        return private_intersections[hash_to].get_state() !== "VACANT";
+    };
+
+    this.inferior_source = function (hash_from, hash_to) {
+        return (private_intersections[hash_from].get_count() - private_intersections[hash_to].get_count()) > -1;
+    };
+
+    this.not_color_double = function (hash_from, hash_to) {
+        for (var from_indice in private_intersections[hash_from].get_pieces()){
+            var from_color = private_intersections[hash_from].get_pieces()[from_indice].get_color();
+            for (var to_indice in private_intersections[hash_to].get_pieces()){
+                var to_color = private_intersections[hash_to].get_pieces()[to_indice].get_color();
+                if (to_color === "WHITE"){
+                    continue;
+                }
+                if (to_color === from_color){
+                    return false
+                }
+            }
+        }
+        return true;
+    };
+
+    this.stacks_sum_size_is_valid = function(hash_from, hash_to){
+        return private_intersections[hash_from].get_count() + private_intersections[hash_to].get_count() <= 5;
+    };
 
     this.move_is_valid = function(hash_from, hash_to){
-        var intersections = this.get_intersections();
-        var is_neighbour = [1, 9, 10].indexOf(Math.abs(hash_from - hash_to)) > -1;
-        var move_to_stack = private_intersections[hash_to].get_state() !== "VACANT";
-        var inferior_size = (intersections[hash_from].get_count() - intersections[hash_to].get_count());
-        var from_stack_colors = [];
-        var from_pieces = intersections[hash_from].get_pieces();
-        var to_pieces = intersections[hash_to].get_pieces();
-        for (var piece in from_pieces){
-            from_stack_colors += from_pieces[piece].get_color();
-        }
-        var to_stack_colors = [];
-        for (var piece in to_pieces){
-            to_stack_colors += to_pieces[piece].get_color();
-        }
-        var not_color_double = true;
-        for (var color in to_stack_colors){
-            if (to_stack_colors[color] === "WHITE"){
-                continue;
-            }
-            if (from_stack_colors.indexOf(to_stack_colors[color]) > -1){
-                not_color_double = false;
-                break;
-            }
-        }
-        var sum_from_to = this.get_intersections()[hash_from].get_count() + this.get_intersections()[hash_to].get_count();
-        return (is_neighbour &&
-                move_to_stack &&
-                sum_from_to <= 5 &&
-                inferior_size > -1 &&
+        return (this.is_neighbour(hash_from, hash_to) &&
+                this.target_not_vacant(hash_to) &&
+                this.stacks_sum_size_is_valid(hash_from, hash_to) &&
+                this.inferior_source(hash_from, hash_to) &&
                 this.not_opponent_color_in_stacks(hash_from, hash_to) &&
-                not_color_double === false);
+                this.not_color_double(hash_from, hash_to) );
     };
 
     this.player_get_point = function(hash, color){
