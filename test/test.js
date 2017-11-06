@@ -409,3 +409,28 @@ LyngkTestCase.prototype.testStory28 = function(){
         (engine.get_intersections()[e3.hash()].get_color() === e3_init_color)
     );
 };
+
+LyngkTestCase.prototype.testStory29 = function(){
+    var engine = new Lyngk.Engine();
+    var count = 0;
+    for (var c in Lyngk.Columns){
+        for (var l in Lyngk.Lines){
+            var coordinates = new Lyngk.Coordinates(Lyngk.Columns[c], Lyngk.Lines[l]);
+            if (coordinates.is_valid() === true && engine.is_movable(coordinates.hash())){
+                count += 1;
+            }
+        }
+    }
+    // On my table, H6, H7 and I7 are IVORY
+    assertTrue(count === 39);
+};
+
+// invalid : INVAL	    invalid : INVAL	    A3 : GREEN	        invalid : INVAL	    invalid : INVAL	    invalid : INVAL	    invalid : INVAL	    invalid : INVAL	    invalid : INVAL
+// invalid : INVAL	    B2 : RED	        B3 : BLUE	        B4 : GREEN	        B5 : BLUE	        invalid : INVAL	    invalid : INVAL	    invalid : INVAL	    invalid : INVAL
+// C1 : WHITE	        C2 : GREEN	        C3 : WHITE	        C4 : BLACK	        C5 : GREEN	        C6 : RED	        C7 : BLACK	        invalid : INVAL	    invalid : INVAL
+// invalid : INVAL	    D2 : BLUE	        D3 : BLUE	        D4 : GREEN	        D5 : BLUE	        D6 : RED	        D7 : IVORY	        invalid : INVAL	    invalid : INVAL
+// invalid : INVAL	    E2 : RED	        E3 : BLACK	        E4 : RED	        E5 : BLACK	        E6 : IVORY	        E7 : BLACK	        E8 : IVORY	        invalid : INVAL
+// invalid : INVAL	    invalid : INVAL	    F3 : RED	        F4 : BLACK	        F5 : BLUE	        F6 : GREEN	        F7 : RED	        F8 : BLACK	        invalid : INVAL
+// invalid : INVAL	    invalid : INVAL	    G3 : BLUE	        G4 : BLUE	        G5 : WHITE	        G6 : GREEN	        G7 : GREEN	        G8 : IVORY	        G9 : BLACK
+// invalid : INVAL	    invalid : INVAL	    invalid : INVAL	    invalid : INVAL	    H5 : RED	        H6 : IVORY	        H7 : IVORY	        H8 : IVORY	        invalid : INVAL
+// invalid : INVAL	    invalid : INVAL	    invalid : INVAL	    invalid : INVAL	    invalid : INVAL	    invalid : INVAL	    I7 : IVORY	        invalid : INVAL	    invalid : INVAL
