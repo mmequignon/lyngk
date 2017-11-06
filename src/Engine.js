@@ -115,13 +115,21 @@ Lyngk.Engine = function () {
         return private_intersections[hash_from].get_count() + private_intersections[hash_to].get_count() <= 5;
     };
 
+    this.not_white_and_first_turn = function(hash_from){
+        if (private_turn === 0 && private_intersections[hash_from].get_color() === "WHITE"){
+            return false;
+        }
+        return true;
+    };
+
     this.move_is_valid = function(hash_from, hash_to){
         return (this.is_neighbour(hash_from, hash_to) &&
                 this.target_not_vacant(hash_to) &&
                 this.stacks_sum_size_is_valid(hash_from, hash_to) &&
                 this.inferior_source(hash_from, hash_to) &&
                 this.not_opponent_color_in_stacks(hash_from, hash_to) &&
-                this.not_color_double(hash_from, hash_to) );
+                this.not_color_double(hash_from, hash_to) &&
+                this.not_white_and_first_turn(hash_from));
     };
 
     this.player_get_point = function(hash, color){
@@ -144,6 +152,28 @@ Lyngk.Engine = function () {
 
     this.get_player_score = function(player){
         return private_player_scores[player];
+    };
+
+    this.neighbours = function(hash){
+        var neighbours = [];
+        var hashs = [hash - 10, hash - 9, hash - 1, hash + 1, hash + 9, hash + 10];
+        for (var h in hashs){
+            if ( private_intersections[hashs[h]] !== void 0){
+                neighbours.push(hashs[h]);
+            }
+        }
+        return neighbours;
+    };
+
+    this.is_movable = function(hash_from){
+        var neighbours = this.neighbours(hash_from);
+        for (var neighbour in neighbours){
+            var hash_to = neighbours[neighbour];
+            if (this.move_is_valid(hash_from, hash_to)){
+                return true;
+            }
+        }
+        return false;
     };
 
     init();
