@@ -342,8 +342,8 @@ LyngkTestCase.prototype.testStory24 = function(){
 LyngkTestCase.prototype.testStory25 = function(){
     var engine = new Lyngk.Engine();
     var g3 = new Lyngk.Coordinates("G", 3);
-    var g4 = new Lyngk.Coordinates("G", 4);
-    engine.move_stack(g3.hash(), g4.hash());
+    var f3 = new Lyngk.Coordinates("F", 3);
+    engine.move_stack(g3.hash(), f3.hash());
     assertTrue(engine.get_current_player() === 'Joueur 2');
 };
 
@@ -360,23 +360,23 @@ LyngkTestCase.prototype.testStory26 = function(){
 
 LyngkTestCase.prototype.testStory27 = function(){
     var engine = new Lyngk.Engine();
+    var c2 = new Lyngk.Coordinates("C", 2);
     var c3 = new Lyngk.Coordinates("C", 3);
     var d3 = new Lyngk.Coordinates("D", 3);
     var e3 = new Lyngk.Coordinates("E", 3);
-    var f3 = new Lyngk.Coordinates("F", 3);
-    var g3 = new Lyngk.Coordinates("G", 3);
-    var c5 = new Lyngk.Coordinates("C", 5);
+    var e4 = new Lyngk.Coordinates("E", 4);
     var d5 = new Lyngk.Coordinates("D", 5);
-    var e5 = new Lyngk.Coordinates("E", 5);
-    var f5 = new Lyngk.Coordinates("F", 5);
-    engine.ask_color("BLUE");
+    var d6 = new Lyngk.Coordinates("D", 6);
+    var d7 = new Lyngk.Coordinates("D", 7);
+    var e7 = new Lyngk.Coordinates("E", 7);
+    engine.ask_color("GREEN");
+    engine.move_stack(c2.hash(), c3.hash());
+    engine.move_stack(d5.hash(), d6.hash());
     engine.move_stack(c3.hash(), d3.hash());
-    engine.move_stack(c5.hash(), d5.hash());
+    engine.move_stack(d6.hash(), d7.hash());
     engine.move_stack(d3.hash(), e3.hash());
-    engine.move_stack(d5.hash(), e5.hash());
-    engine.move_stack(e3.hash(), f3.hash());
-    engine.move_stack(e5.hash(), f5.hash());
-    engine.move_stack(f3.hash(), g3.hash());
+    engine.move_stack(d7.hash(), e7.hash());
+    engine.move_stack(e3.hash(), e4.hash());
     assertTrue(engine.get_player_score(0) === 1);
     var count = 0;
     for (var l in Lyngk.Lines){
@@ -390,7 +390,7 @@ LyngkTestCase.prototype.testStory27 = function(){
     assertTrue(count === 38);
 };
 
-LyngkTestCase.prototype.testStory27 = function(){
+LyngkTestCase.prototype.testStory28 = function(){
     var engine = new Lyngk.Engine();
     var c3 = new Lyngk.Coordinates("C", 3);
     var d3 = new Lyngk.Coordinates("D", 3);
