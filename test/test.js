@@ -450,6 +450,38 @@ LyngkTestCase.prototype.testStory31 = function(){
     assertTrue(valid_moves.length === 5);
 };
 
+LyngkTestCase.prototype.testStory32 = function(){
+    var engine = new Lyngk.Engine();
+    var move;
+    var game_is_running = true;
+    while (game_is_running === true) {
+        if (engine.get_turn() === 0){
+            engine.ask_color("IVORY");
+        }
+        if (engine.get_turn() === 1){
+            engine.ask_color("RED");
+        }
+        var valid_moves = [];
+        for (var c in Lyngk.Columns){
+            for (var l in Lyngk.Lines){
+                var coordinates = new Lyngk.Coordinates(Lyngk.Columns[c], Lyngk.Lines[l]);
+                if (coordinates.is_valid() === true && engine.is_movable(coordinates.hash())){
+                    valid_moves = valid_moves.concat(engine.valid_moves(coordinates.hash()));
+                }
+            }
+        }
+        if (valid_moves.length === 0){
+            game_is_running = false;
+            break;
+        }
+        move = valid_moves[Math.floor(Math.random()*valid_moves.length)].split(" ");
+
+        engine.move_stack(parseInt(move[0]), parseInt(move[1]));
+    }
+    engine.display_score();
+    assertTrue(engine.get_winner() !== false);
+};
+
 // invalid : INVAL	    invalid : INVAL	    A3 : GREEN	        invalid : INVAL	    invalid : INVAL	    invalid : INVAL	    invalid : INVAL	    invalid : INVAL	    invalid : INVAL
 // invalid : INVAL	    B2 : RED	        B3 : BLUE	        B4 : GREEN	        B5 : BLUE	        invalid : INVAL	    invalid : INVAL	    invalid : INVAL	    invalid : INVAL
 // C1 : WHITE	        C2 : GREEN	        C3 : WHITE	        C4 : BLACK	        C5 : GREEN	        C6 : RED	        C7 : BLACK	        invalid : INVAL	    invalid : INVAL
