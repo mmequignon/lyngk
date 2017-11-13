@@ -166,5 +166,17 @@ Lyngk.Engine = function () {
         return false;
     };
 
+    this.valid_moves = function(hash_from){
+        var neighbours = this.neighbours(hash_from);
+        var valid_moves = [];
+        for (var neighbour in neighbours){
+            var hash_to = neighbours[neighbour];
+            if (this.move_is_valid(hash_from, hash_to)){
+                valid_moves.push((hash_from, hash_to))
+            }
+        }
+        return valid_moves;
+    };
+
     init();
 };
