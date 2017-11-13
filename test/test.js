@@ -392,21 +392,21 @@ LyngkTestCase.prototype.testStory27 = function(){
 
 LyngkTestCase.prototype.testStory28 = function(){
     var engine = new Lyngk.Engine();
-    var c3 = new Lyngk.Coordinates("C", 3);
     var d3 = new Lyngk.Coordinates("D", 3);
-    var e3 = new Lyngk.Coordinates("E", 3);
+    var d4 = new Lyngk.Coordinates("D", 4);
+    var e4 = new Lyngk.Coordinates("E", 4);
     engine.ask_color("BLUE");
-    engine.move_stack(c3.hash(), d3.hash());
-    var d3_init_count = engine.get_intersections()[d3.hash()].get_count();
-    var d3_init_color = engine.get_intersections()[d3.hash()].get_color();
-    var e3_init_count = engine.get_intersections()[e3.hash()].get_count();
-    var e3_init_color = engine.get_intersections()[e3.hash()].get_color();
-    engine.move_stack(d3.hash(), e3.hash());
+    engine.move_stack(d3.hash(), d4.hash());
+    var d4_init_count = engine.get_intersections()[d4.hash()].get_count();
+    var d4_init_color = engine.get_intersections()[d4.hash()].get_color();
+    var e4_init_count = engine.get_intersections()[e4.hash()].get_count();
+    var e4_init_color = engine.get_intersections()[e4.hash()].get_color();
+    engine.move_stack(d4.hash(), e4.hash());
     assertTrue(
-        (engine.get_intersections()[d3.hash()].get_count() === d3_init_count) &&
-        (engine.get_intersections()[d3.hash()].get_color() === d3_init_color) &&
-        (engine.get_intersections()[e3.hash()].get_count() === e3_init_count) &&
-        (engine.get_intersections()[e3.hash()].get_color() === e3_init_color)
+        (engine.get_intersections()[d4.hash()].get_count() === d4_init_count) &&
+        (engine.get_intersections()[d4.hash()].get_color() === d4_init_color) &&
+        (engine.get_intersections()[e4.hash()].get_count() === e4_init_count) &&
+        (engine.get_intersections()[e4.hash()].get_color() === e4_init_color)
     );
 };
 

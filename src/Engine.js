@@ -70,17 +70,7 @@ Lyngk.Engine = function () {
         var from_intersection = private_intersections[hash_from];
         var to_intersection = private_intersections[hash_to];
         var opponent_color = private_player_colors[(private_turn + 1) % 2];
-        for (var from_piece in from_intersection.get_pieces()){
-            if( from_intersection.get_pieces()[from_piece].get_color() === opponent_color ){
-                return false;
-            }
-        }
-        for (var to_piece in to_intersection.get_pieces()){
-            if ( to_intersection.get_pieces()[to_piece].get_color() === opponent_color ){
-                return false;
-            }
-        }
-        return true;
+        return ((from_intersection.get_color() === opponent_color) || (to_intersection.get_color() === opponent_color)) === false;
     };
 
     this.is_neighbour = function (hash_from, hash_to) {
