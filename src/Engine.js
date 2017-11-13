@@ -12,6 +12,7 @@ Lyngk.Engine = function () {
     var private_player_colors;
     var private_player_scores;
     var private_turn;
+    var private_winner = false;
 
 
     var get_random_piece = function(){
@@ -124,7 +125,8 @@ Lyngk.Engine = function () {
 
     this.player_get_point = function(hash, color){
         var stack_is_full = (private_intersections[hash].get_state() === 'FULL_STACK');
-        var same_color = (private_intersections[hash].get_color() === color);
+        var stack_color = private_intersections[hash].get_color();
+        var same_color = (stack_color === color || stack_color === "WHITE");
         return (stack_is_full && same_color);
     };
 
@@ -171,12 +173,67 @@ Lyngk.Engine = function () {
         var valid_moves = [];
         for (var neighbour in neighbours){
             var hash_to = neighbours[neighbour];
-            if (this.move_is_valid(hash_from, hash_to)){
-                valid_moves.push((hash_from, hash_to))
+            if (this.move_is_valid(hash_from, hash_to) === true){
+                valid_moves.push(hash_from + " " +  hash_to);
             }
         }
         return valid_moves;
     };
+
+    this.get_turn = function(){
+        return private_turn;
+    };
+
+    this.get_winner = function(){
+        return private_winner;
+    };
+
+    this.display_score = function() {
+        var score = this.compute_score();
+        console.log("\t | J1 | J2 |");
+        var sizes = [5, 4, 3, 2];
+        for (var i in sizes){
+            var j1 = score[sizes[i]][0];
+            var j2 = score[sizes[i]][1];
+            if (private_winner === false) {
+                if (j1 > j2) {
+                    private_winner = private_players[0];
+
+                }
+                else if (j2 > j1) {
+                    private_winner = private_players[1];
+                }
+            }
+            console.log(" " + sizes[i] + " | " + j1 + "  | " + j2 + "  | ");
+        }
+        if (private_winner === false){
+            private_winner = "Nobody";
+        }
+        console.log(private_winner  + " WON");
+    };
+
+    this.compute_score = function(){
+        var score = {5: [0, 0], 4: [0, 0], 3: [0, 0], 2: [0, 0]};
+        score[5] = private_player_scores;
+        for (var c in Lyngk.Columns){
+            for (var l in Lyngk.Lines){
+                var coord = new Lyngk.Coordinates(Lyngk.Columns[c], Lyngk.Lines[l]);
+                if (coord.is_valid() === true){
+                    var inter = private_intersections[coord.hash()];
+                    if (inter.get_count() < 2){
+                        continue;
+                    }
+                    for(var i in [0, 1]){
+                        if(inter.get_color() === private_player_colors[i]){
+                            score[inter.get_count()][i] += 1;
+                        }
+                    }
+                }
+            }
+        }
+        return score;
+    };
+
 
     init();
 };
