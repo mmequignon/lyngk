@@ -443,6 +443,13 @@ LyngkTestCase.prototype.testStory30 = function(){
     assertTrue(count === 32);
 };
 
+LyngkTestCase.prototype.testStory31 = function(){
+    var engine = new Lyngk.Engine();
+    var d3 = new Lyngk.Coordinates("D", 3);
+    var valid_moves = engine.valid_moves(d3.hash());
+    assertTrue(valid_moves.length === 5);
+};
+
 // invalid : INVAL	    invalid : INVAL	    A3 : GREEN	        invalid : INVAL	    invalid : INVAL	    invalid : INVAL	    invalid : INVAL	    invalid : INVAL	    invalid : INVAL
 // invalid : INVAL	    B2 : RED	        B3 : BLUE	        B4 : GREEN	        B5 : BLUE	        invalid : INVAL	    invalid : INVAL	    invalid : INVAL	    invalid : INVAL
 // C1 : WHITE	        C2 : GREEN	        C3 : WHITE	        C4 : BLACK	        C5 : GREEN	        C6 : RED	        C7 : BLACK	        invalid : INVAL	    invalid : INVAL
