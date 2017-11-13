@@ -425,6 +425,24 @@ LyngkTestCase.prototype.testStory29 = function(){
     assertTrue(count === 39);
 };
 
+LyngkTestCase.prototype.testStory30 = function(){
+    var engine = new Lyngk.Engine();
+    engine.ask_color("BLACK");
+    var a3 = new Lyngk.Coordinates("A", 3);
+    var b3 = new Lyngk.Coordinates("B", 3);
+    engine.move_stack(a3.hash(), b3.hash());
+    var count = 0;
+    for (var c in Lyngk.Columns){
+        for (var l in Lyngk.Lines){
+            var coordinates = new Lyngk.Coordinates(Lyngk.Columns[c], Lyngk.Lines[l]);
+            if (coordinates.is_valid() === true && engine.is_movable(coordinates.hash())){
+                count += 1;
+            }
+        }
+    }
+    assertTrue(count === 32);
+};
+
 // invalid : INVAL	    invalid : INVAL	    A3 : GREEN	        invalid : INVAL	    invalid : INVAL	    invalid : INVAL	    invalid : INVAL	    invalid : INVAL	    invalid : INVAL
 // invalid : INVAL	    B2 : RED	        B3 : BLUE	        B4 : GREEN	        B5 : BLUE	        invalid : INVAL	    invalid : INVAL	    invalid : INVAL	    invalid : INVAL
 // C1 : WHITE	        C2 : GREEN	        C3 : WHITE	        C4 : BLACK	        C5 : GREEN	        C6 : RED	        C7 : BLACK	        invalid : INVAL	    invalid : INVAL
