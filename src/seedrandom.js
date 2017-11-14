@@ -72,8 +72,8 @@ function seedrandom(seed, options, callback) {
     return (n + x) / d;                 // Form the number within [0, 1).
   };
 
-  prng.int32 = function() { return arc4.g(4) | 0; }
-  prng.quick = function() { return arc4.g(4) / 0x100000000; }
+  prng.int32 = function() { return arc4.g(4) | 0; };
+  prng.quick = function() { return arc4.g(4) / 0x100000000; };
   prng.double = prng;
 
   // Mix the randomness into accumulated entropy.
@@ -148,7 +148,7 @@ function ARC4(key) {
 }
 
 //
-// copy()
+// copy() private_intersections[hash_to]
 // Copies internal state of ARC4 to or from a plain object.
 //
 function copy(f, t) {
@@ -156,7 +156,7 @@ function copy(f, t) {
   t.j = f.j;
   t.S = f.S.slice();
   return t;
-};
+}
 
 //
 // flatten()

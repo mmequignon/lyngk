@@ -2,48 +2,54 @@
 
 Lyngk.State = {VACANT: 0, ONE_PIECE: 1, STACK: 2, FULL_STACK: 3};
 
-Lyngk.Intersection = function (c) {
-    var private_coordinate, private_pieces;
+Lyngk.Intersection = function () {
+    var private_pieces;
+    var private_states = ["VACANT", "ONE_PIECE", "STACK",
+            "STACK", "STACK", "FULL_STACK"];
 
-    var init = function(coordinate){
-        private_coordinate = coordinate;
+    var init = function () {
         private_pieces = [];
-    }
+    };
 
-    this.get_state = function(){
+    this.get_state = function () {
         var length = private_pieces.length;
-        return (length === 0) ? "VACANT" : (length === 5) ? "FULL_STACK" : (length === 1) ? "ONE_PIECE" : "STACK";
+        return private_states[length];
     };
 
-    this.get_color = function(){
-        return (this.get_count() > 0) ? private_pieces[private_pieces.length - 1].get_color() : "NONE";
+    this.get_color = function () {
+        var positive = this.get_count() > 0;
+        if (positive) {
+            var color = private_pieces[private_pieces.length - 1].get_color();
+            return color;
+        }
+        return "NONE";
     };
 
-    this.get_count = function(){
+    this.get_count = function () {
         return private_pieces.length;
     };
 
-    this.put = function(piece) {
-        if (this.get_state() !== "FULL_STACK"){
+    this.put = function (piece) {
+        if (this.get_state() !== "FULL_STACK") {
             private_pieces.push(piece);
         }
     };
 
-    this.pop = function() {
+    this.pop = function () {
         return private_pieces.pop();
     };
 
-    this.shift = function(){
+    this.shift = function () {
         return private_pieces.shift();
     };
 
-    this.flush = function(){
+    this.flush = function () {
         private_pieces = [];
     };
 
-    this.get_pieces = function(){
+    this.get_pieces = function () {
         return private_pieces;
     };
 
-    init(c);
+    init();
 };
